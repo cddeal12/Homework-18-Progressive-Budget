@@ -16,14 +16,15 @@ app.use(express.json());
 app.use(express.static("public"));
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/budget',
+  process.env.MONGDB_URI || 'mongodb://localhost/budget',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false
   }
-);
+).then(() => console.log("Connected to mongodb atlas")
+).catch(() => console.log("Failed to connect to mongodb atlas"));
 
 // routes
 app.use(require("./routes/api.js"));
